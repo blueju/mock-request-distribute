@@ -5,17 +5,14 @@ export default {
   'POST /agrs': (request, response) => {
     /**
      * 服务
-     * @type {string}
      */
     const serviceName = request.body.sysHead.service;
     /**
      * 接口
-     * @type {string}
      */
     const interfaceName = request.body.sysHead.interface;
     /**
      * mock 路径
-     * @type {string}
      */
     const mockPath = path.resolve(
       __dirname,
@@ -25,7 +22,25 @@ export default {
     /**
      * 引入内容
      */
-    const content = require(mockPath);
-    response.json(content);
+    if (fs.existsSync(mockPath)) {
+      const content = require(mockPath);
+      response.json({
+        sysHead: {
+          code: '000000',
+          msg: 'success',
+        },
+        body: {
+          data: content,
+        },
+      });
+    } else {
+      response.json({
+        sysHead: {
+          code: '-1',
+          msg: 'mock 路径不存在',
+        },
+        body: {},
+      });
+    }
   },
 };
