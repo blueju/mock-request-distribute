@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import express from 'express';
 
@@ -22,7 +23,25 @@ export default {
     /**
      * mock内容
      */
-    const content: string = require(mockPath);
-    response.json(content);
+    if (fs.existsSync(mockPath)) {
+      const content: string = require(mockPath);
+      response.json({
+        sysHead: {
+          code: '000000',
+          msg: 'success',
+        },
+        body: {
+          data: content,
+        },
+      });
+    } else {
+      response.json({
+        sysHead: {
+          code: '-1',
+          msg: 'mock路径不存在',
+        },
+        body: {},
+      });
+    }
   },
 };
