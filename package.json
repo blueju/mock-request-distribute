@@ -25,6 +25,7 @@
     "umi": "^3.3.7"
   },
   "devDependencies": {
+    "@types/express": "^4.17.11",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@umijs/test": "^3.3.7",
