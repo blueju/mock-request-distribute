@@ -1,14 +1,22 @@
 // 模拟引入
-// @ts-ignore
-import mockRquestDistribute from '../src/index.ts';
+import mockRquestDistribute from '../src/index';
 import express from 'express';
 
 export default {
   'POST /agrs': (req: express.Request, res: express.Response) => {
-    console.log('---------');
-    mockRquestDistribute(req, res);
-    // // 添加跨域请求头
-    // res.setHeader('Access-Control-Allow-Origin', '*');
-    // res.end('ok');
+    const mockReuslt = mockRquestDistribute(
+      req.body.sysHead.service,
+      req.body.sysHead.interface,
+    );
+    if (mockReuslt.success) {
+      res.json(mockReuslt.message);
+    } else {
+      res.json({
+        sysHead: {
+          code: '-1',
+          msg: 'mock路径不存在',
+        },
+      });
+    }
   },
 };
