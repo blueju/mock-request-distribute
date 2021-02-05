@@ -7,10 +7,12 @@ title: 示例
 ```jsx
 import React, { useState, Fragment } from 'react';
 import { Button, Input, Row, Col } from 'antd';
-// 只引入不使用，否则修改 src/index.ts 时无法触发热更新
+// 尽管只是用来打印一下，但还是必须引用，否则修改 src/index.ts 时无法触发热更新
 import mockRquestDistribute from 'mock-request-distribute';
 
 export default () => {
+  console.debug(mockRquestDistribute.toString());
+
   // 响应内容
   const [resText, setResText] = useState('');
 
