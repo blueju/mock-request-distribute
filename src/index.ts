@@ -11,11 +11,11 @@ export default (serviceName: string = '', interfaceName: string = '') => {
    * mock路径
    */
   const mockPath: string = path.resolve(
-    __dirname,
+    process.cwd(),
+    'mock',
     serviceName,
     interfaceName + '.json',
   );
-
   // mock路径是否存在
   if (fs.existsSync(mockPath)) {
     /**
