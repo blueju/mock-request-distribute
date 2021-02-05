@@ -1,7 +1,10 @@
 {
-  "private": true,
+  "private": false,
   "name": "mock-request-distribute",
   "version": "1.0.0",
+  "repository": {
+    "url": "https://github.com/blueju/mock-request-distribute"
+  },
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
