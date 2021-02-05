@@ -1,20 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-import express from 'express';
 
 /**
  * mock请求分发
- * @param request       express's request
- * @param response      express's response
  * @param serviceName   服务名
  * @param interfaceName 接口名
  */
-export default (
-  request: express.Request,
-  response: express.Response,
-  serviceName: string = '',
-  interfaceName: string = '',
-) => {
+export default (serviceName: string = '', interfaceName: string = '') => {
   /**
    * mock路径
    */
@@ -23,7 +15,6 @@ export default (
     serviceName,
     interfaceName + '.json',
   );
-  console.log('453453');
 
   // mock路径是否存在
   if (fs.existsSync(mockPath)) {
@@ -31,9 +22,14 @@ export default (
      * mock内容
      */
     const content: string = require(mockPath);
-    const xxx = response.json(content);
-    console.log(xxx);
+    return {
+      success: true,
+      message: content,
+    };
   } else {
-    console.log('mock路径不存在');
+    return {
+      success: false,
+      message: 'mock路径不存在',
+    };
   }
 };
