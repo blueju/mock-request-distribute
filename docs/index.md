@@ -7,6 +7,8 @@ title: 示例
 ```jsx
 import React, { useState, Fragment } from 'react';
 import { Button, Input, Row, Col } from 'antd';
+// 只引入不使用，否则修改 src/index.ts 时无法触发热更新
+import mockRquestDistribute from 'mock-request-distribute';
 
 export default () => {
   // 响应内容
@@ -59,9 +61,11 @@ export default () => {
       },
       method: 'POST',
       body: JSON.stringify(body),
-    }).then(res => {
-      setResText(JSON.stringify(res, null, 2));
-    });
+    })
+      .then(res => res.json())
+      .then(resJson => {
+        setResText(JSON.stringify(resJson, null, 2));
+      });
   }
 
   return (
@@ -86,7 +90,7 @@ export default () => {
       </fieldset>
       <h3>响应内容：</h3>
       <textarea
-        value={resText}
+        defaultValue={resText}
         style={{ width: '100%', height: 250 }}
         readOnly
       />
