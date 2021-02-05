@@ -4,12 +4,12 @@ import express from 'express';
 
 export default {
   'POST /agrs': (req: express.Request, res: express.Response) => {
-    const mockReuslt = mockRquestDistribute(
+    const mockResult = mockRquestDistribute(
       req.body.sysHead.service,
       req.body.sysHead.interface,
     );
-    if (mockReuslt.success) {
-      res.json(mockReuslt.message);
+    if (mockResult.success) {
+      res.json(mockResult.message);
     } else {
       res.json({
         sysHead: {
